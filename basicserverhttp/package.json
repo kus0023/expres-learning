@@ -1,0 +1,20 @@
+{
+  "name": "basicserverhttp",
+  "version": "1.0.0",
+  "description": "This is simple project for creating http server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "NA"
+  },
+  "keywords": [
+    "basic-server",
+    "http-server"
+  ],
+  "author": "Kus",
+  "license": "ISC"
+}

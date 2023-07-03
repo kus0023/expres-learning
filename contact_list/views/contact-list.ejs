@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+
+    <link rel="stylesheet" href="contact-list.css">
+</head>
+
+<body>
+    <h1>Contact List</h1>
+
+    <hr>
+    <br>
+    <aside id="contact-form-aside">
+        <h1>Create New Contact</h1>
+
+        <hr>
+
+        <form action="/contacts" method="post" id="contact-form">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name" required>
+
+            <br>
+
+            <label for="phone_number">Phone number: </label>
+            <input type="number" name="phone_number" id="phone_number" required>
+
+            <br>
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+
+    </aside>
+    <br>
+    <section id="show-list">
+        <ol>
+
+            <% contact_list.forEach( (p, index)=>{ %>
+                <li>
+                    <p>Name: <span>
+                            <%= p.name %>
+                        </span></p>
+                    <p>Phone number: <span>
+                            <%= p.phone_number %>
+                        </span></p>
+                    <button id="delete" data-index=<%=index %> onclick=handleDelete(<%= index %>)>Delete</button>
+                </li>
+
+                <% }) %>
+        </ol>
+    </section>
+
+
+
+    <br><br>
+
+    <p><b>Home page:</b> <a href="http://localhost:8000">Click Here</a></p>
+
+
+    <script>
+        function handleDelete(index) {
+            console.log(index);
+
+            const URL = "http://localhost:8000/contacts/" + index;
+
+            fetch(URL, { method: "delete" })
+                .then(res => {
+                    console.log(res);
+                    location.replace('/contacts')
+                }).catch(err => {
+                    console.error("Error", err);
+                })
+
+
+
+        }
+    </script>
+</body>
+
+</html>

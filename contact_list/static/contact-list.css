@@ -1,0 +1,54 @@
+#delete {
+    border: red;
+    background-color: white;
+    color: red;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    font-size: medium;
+    font-weight: bold;
+}
+
+#delete:hover {
+    color: white;
+    background-color: red;
+}
+
+#contact-form {
+    font-size: larger;
+}
+
+#contact-form>input {
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#contact-form>button{
+    background-color: white;
+    font-size: medium;
+    padding: 4px;
+    border: 2px solid ;
+    border-radius: 4px;
+}
+
+#contact-form-aside {
+
+    width: 30%;
+    padding: 15px;
+    padding-left: 15px;
+    margin-left: 15px;
+
+    /* margin-top: 1.5em; */
+    float: right;
+    font-style: italic;
+    background-color: rgb(241, 241, 241);
+
+}
+
+
+
+#show-list {
+    width: 70%;
+}

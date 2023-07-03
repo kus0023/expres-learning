@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <h1>Folowing are my skills:</h1>
+
+    <ul>
+        <% for (let s of skills) { %>
+            <li id=s> <%= s %> </li>
+        <% } %>
+        
+    </ul>
+
+    <br>
+    <br>
+
+    <p><b>Home page:</b> <a href="http://localhost:8000">Click Here</a></p>
+</body>
+</html>
