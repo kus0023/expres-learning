@@ -4,13 +4,15 @@
   "description": "Contact list project to learn expressjs",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "run": "nodemon",
+    "start": "nodemon",
     "test": "node index.js"
   },
   "author": "Kus",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1"
   }
 }
