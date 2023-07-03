@@ -4,6 +4,11 @@ const path = require('path');
 
 //Global variable
 const PORT = 8000;
+
+//Database connection before setting express app.
+require('./config/mymongodb.js');
+
+//Setting express app
 const app = express();
 
 
