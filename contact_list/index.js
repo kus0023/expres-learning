@@ -8,6 +8,9 @@ const PORT = 8000;
 //Database connection before setting express app.
 require('./config/mymongodb.js');
 
+//using Schema
+const Contact = require('./model/contact.js');
+
 //Setting express app
 const app = express();
 
