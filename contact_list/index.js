@@ -67,9 +67,20 @@ app.get('/profile', (req, res)=>{
 
 app.get('/contacts', (req, res)=>{
 
-    return res.render('contact-list', {
-        contact_list: contactList
-    })
+    Contact.find({}).then(contactList=>{
+        // console.log("Fetched contacts from DB", contactList);
+
+        //send the contact to render on page
+        return res.render('contact-list', {
+            contact_list: contactList
+        });
+    }).catch(err=>{
+        console.log("Error in fetching contacts", err);
+
+        return res.render("error", {error: "Internal server error. Cannot fetch Contacts."});
+    });
+
+    
 
 });
 
@@ -77,10 +88,11 @@ app.post('/contacts', (req, res)=>{
 
     console.log("Adding Form data: ", req.body);
 
+    //Creating a new contact, it will return a promise
     Contact.create({name: req.body.name, phone_number: req.body.phone_number})
     
     .then(contactDoc=>{
-        
+        //getting the new contact document
         console.log("Document created", contactDoc);
         return res.redirect('contacts');
 
