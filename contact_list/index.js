@@ -77,9 +77,21 @@ app.post('/contacts', (req, res)=>{
 
     console.log("Adding Form data: ", req.body);
 
-    contactList.push(req.body);
+    Contact.create({name: req.body.name, phone_number: req.body.phone_number})
+    
+    .then(contactDoc=>{
+        
+        console.log("Document created", contactDoc);
+        return res.redirect('contacts');
 
-    return res.redirect('contacts');
+    }).catch(err=>{
+
+        console.log("Failed to save data in database",err);
+
+        //TODO: ERROR page creation.
+        return res.render('error', {error: "Contact not saved. Internal Server Error"});
+    });
+    
 });
 
 app.delete('/contacts/:index', (req, res)=>{
