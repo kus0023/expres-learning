@@ -106,15 +106,21 @@ app.post('/contacts', (req, res)=>{
     
 });
 
-app.delete('/contacts/:index', (req, res)=>{
+app.delete('/contacts/:id', (req, res)=>{
 
-    const index = req.params.index;
+    const id = req.params.id;
 
-    console.log('Deleting', contactList[index]);
+    console.log('Deleting: ', id);
 
-    contactList.splice(index, 1);
-
-    return res.status(204).send();
+    //Find and delete by ID
+    Contact.findByIdAndDelete(id).then((doc)=>{
+        console.log("Deleted", doc);
+        
+        return res.status(204).send();
+    }).catch(err=>{
+        console.log("Error in deleting contact", err);
+        return;
+    })
 })
 
 app.get('/contact-form', (req, res)=>{

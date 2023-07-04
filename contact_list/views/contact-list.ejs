@@ -39,15 +39,15 @@
     <section id="show-list">
         <ol>
 
-            <% contact_list.forEach( (p, index)=>{ %>
-                <li>
+            <% contact_list.forEach( p=>{ %>
+                <li id="<%= p._id %>">
                     <p>Name: <span>
                             <%= p.name %>
                         </span></p>
                     <p>Phone number: <span>
                             <%= p.phone_number %>
                         </span></p>
-                    <button id="delete" data-index=<%=index %> onclick=handleDelete(<%= index %>)>Delete</button>
+                    <button id="delete" onclick="handleDelete('<%= p._id %>')">Delete</button>
                 </li>
 
                 <% }) %>
@@ -62,14 +62,15 @@
 
 
     <script>
-        function handleDelete(index) {
-            console.log(index);
+        function handleDelete(contactId) {
+            console.log(contactId);
 
-            const URL = "http://localhost:8000/contacts/" + index;
+            const URL = "http://localhost:8000/contacts/" + contactId;
 
             fetch(URL, { method: "delete" })
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
+                    //Reloading the page after deletion
                     location.replace('/contacts')
                 }).catch(err => {
                     console.error("Error", err);
