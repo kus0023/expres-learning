@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User List</title>
-</head>
-<body>
+<h1>User List</h1>
+<hr>
+<br>
 
-    <h1>User List</h1>
-    <hr>
+<ol>
+    <% for(let user of users){ %>
+        <li> <%= user %></li>
+    <% }  %>
+</ol>
+
+<form action="/users/add" method="post">
+    <label for="username">username</label>
+    <input type="text" name="username" id="username">
     <br>
-
-    <ol>
-        <li>John Smith</li>
-        <li>Martin Roy</li>
-    </ol>
-
-    <form action="/users/add" method="post">
-        <label for="username">username</label>
-        <input type="text" name="username" id="username">
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-
-    <hr>
-    <br>
-
-    <a href="http://localhost:8000/users/profile">Profile Page</a>
-    
-</body>
-</html>
+    <button type="submit">Submit</button>
+</form>

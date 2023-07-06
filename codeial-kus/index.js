@@ -1,18 +1,25 @@
 const express = require('express');
 const path = require("path");
+const expressLayouts = require('express-ejs-layouts'); //It will lookup for layout.ejs in /views by default.
 
 const PORT = 8000;
 const app = express();
 
 //setting us the view engine
-app.set("view engine",  "ejs");
+app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+//Form data
+app.use(express.urlencoded());
+
+//express ejs layout setup, It should be before routes middleware.
+app.use(expressLayouts);
 
 //Setting up routes in different folder
 app.use('/', require('./routes')); //This will invoke index.js inside ./route by default.
 
-app.listen(PORT, (err)=>{
-    if(err){
+app.listen(PORT, (err) => {
+    if (err) {
         console.log("Error incountered", err);
         return;
     }
