@@ -5,7 +5,7 @@
         <h1>Register Yourself</h1>
     </header>
     <main>
-        <form action="/sigup" method="post">
+        <form action="/users/register" method="post">
             <div class="form-label-container">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" id="email" class="form-input" placeholder="alexa@work.co" required>
@@ -14,6 +14,11 @@
             <div class="form-label-container">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" class="form-input" required>
+            </div>
+
+            <div class="form-label-container">
+                <label for="password-confirm" class="form-label">Confirm Password</label>
+                <input type="password-confirm" id="password-confirm" class="form-input" required>
             </div>
 
             <div class="form-label-container">
