@@ -2,6 +2,9 @@ const express = require('express');
 const path = require("path");
 const expressLayouts = require('express-ejs-layouts'); //It will lookup for layout.ejs in /views by default.
 
+//Database
+const db = require("./config/db");
+
 const PORT = 8000;
 const app = express();
 
