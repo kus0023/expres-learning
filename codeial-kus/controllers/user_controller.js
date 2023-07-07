@@ -67,9 +67,14 @@ module.exports.register = async function (req, res) {
 
 }
 
-// use to check login status from db
+// Now using passport to handle login and session managment.
 module.exports.login = function (req, res) {
 
     console.log("User Loged in.");
-    return res.send();
+    return res.redirect("/");
+}
+
+//sign in and create a session for the user
+module.exports.createSession = function(req, res){
+    return res.redirect("/");
 }

@@ -5,9 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const localStrategy = new LocalStrategy({
     usernameField: 'email'
-});
-
-passport.use(localStrategy, async function (email, password, done) {
+}, async function (email, password, done) {
 
     try {
 
@@ -19,9 +17,6 @@ passport.use(localStrategy, async function (email, password, done) {
             return done(null, false);
         }
 
-        //Do not expose password to users.
-        user.password = undefined;
-
         return done(null, user);
 
     } catch (error) {
@@ -30,6 +25,8 @@ passport.use(localStrategy, async function (email, password, done) {
     }
 
 });
+
+passport.use(localStrategy);
 
 
 //serializing the user to decide which key to keep in cookie
@@ -46,12 +43,10 @@ passport.deserializeUser( async function (id, done) {
         //Find a user and establish the identity
         const user = await User.findById(id);
 
-        if (!user || user.password != password) {
+        if (!user) {
             console.log("Invalid username/password");
             return done(null, false);
         }
-
-        user.password = undefined;
 
         return done(null, user);
 
@@ -59,3 +54,5 @@ passport.deserializeUser( async function (id, done) {
         console.log("Error in Passport: ", error);
     }
 });
+
+module.exports = passport;
