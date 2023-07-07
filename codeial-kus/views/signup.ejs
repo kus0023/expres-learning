@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/css/signup.ejs">
+
+<div id="container">
+    <header>
+        <h1>Register Yourself</h1>
+    </header>
+    <main>
+        <form action="/sigup" method="post">
+            <div class="form-label-container">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="alexa@work.co" required>
+            </div>
+
+            <div class="form-label-container">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-input" required>
+            </div>
+
+            <div class="form-label-container">
+                <label for="name" class="form-label">Name</label>
+                <input type="name" id="name" class="form-input" placeholder="Alexa Martin" required>
+            </div>
+
+            <div class="form-button-container">
+                <button type="submit">Register</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        <p>Already a User? <a href="/auth/signin">Login</a></p>
+    </footer>
+</div>
