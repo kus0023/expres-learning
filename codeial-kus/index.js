@@ -1,4 +1,6 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+
 const path = require("path");
 const expressLayouts = require('express-ejs-layouts'); //It will lookup for layout.ejs in /views by default.
 
@@ -19,6 +21,7 @@ app.use(express.static("./assets"));
 
 //Form data
 app.use(express.urlencoded());
+app.use(cookieParser())
 
 //express ejs layout setup, It should be before routes middleware.
 app.use(expressLayouts);

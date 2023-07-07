@@ -1,0 +1,7 @@
+Cookie is file which send from browser with every req.
+And server also send the cookie with each res.
+
+In cookies we can send user Id info and then server can validate based on the user ID if a user is valid or not.
+
+Hit a req with cookie --> Server  ---> checks in DB --> response back to browser/client with cookies ----> user receives it if he is valid.
+
