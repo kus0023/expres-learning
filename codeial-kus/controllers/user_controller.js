@@ -1,12 +1,12 @@
 
-const users = ['John Smith', 'Martin Roy', 'Karry Minati']
+const Users = require("../models/user")
 
 module.exports.profile = function (req, res) {
-    return res.render("user_profile", {title: "Profile page"});
+    return res.render("user_profile", { title: "Profile page" });
 }
 
 //controller for adding user
-module.exports.addUser = function (req, res){
+module.exports.addUser = function (req, res) {
 
     console.log("User added Successfully.");
     users.push(req.body.username);
@@ -14,31 +14,61 @@ module.exports.addUser = function (req, res){
 }
 
 //User list controller
-module.exports.showUsers = function(req, res){
-    
-    return res.render('user_list', {users, title: "List of Users"});
+module.exports.showUsers = function (req, res) {
+
+    return res.render('user_list', { users, title: "List of Users" });
 }
 
 //use to get the Page to login
-module.exports.getSignIn = function(req, res){
+module.exports.getSignIn = function (req, res) {
 
-    return res.render('user_sign_in', {title: "Login"}); 
+    return res.render('user_sign_in', { title: "Login" });
 }
 
 //use to get page to register
-module.exports.getSignUp = function(req, res){
-    return res.render('user_sign_up', {title: "Register"});
+module.exports.getSignUp = function (req, res) {
+    return res.render('user_sign_up', { title: "Register" });
 }
 
 //use to register user in database
-module.exports.register = function (req, res){
+module.exports.register = async function (req, res) {
 
-    console.log("User registered.");
-    return res.send();
+    console.log("Trying to create a user");
+
+    //Check if password and confirm password is same or not.
+    if (req.body.password != req.body.confirm_password) {
+        console.log("Password is not Matching.");
+        return res.redirect('back');
+    }
+
+    try {
+
+        //check if user is alredy present or not. if not then create a new user. otherwise do not create.
+
+        const userExists = await Users.findOne({ email: req.body.email });
+
+        if (!userExists) {
+            console.log("Creating user");
+
+            const userDoc = await Users.create(req.body);
+
+            console.log("User created Successfully.", userDoc);
+
+            return res.redirect('/users/sign-in');
+        } else {
+            console.log("User already exists");
+            return res.redirect('back')
+        }
+
+    } catch (error) {
+        console.log("Error in creating User: ", error);
+        return res.redirect('back');
+    }
+
 }
 
 // use to check login status from db
-module.exports.login = function (req, res){
+module.exports.login = function (req, res) {
 
     console.log("User Loged in.");
     return res.send();
