@@ -47,6 +47,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.setAuthenticatedUser);
+
 //Setting up routes in different folder
 app.use('/', require('./routes')); //This will invoke index.js inside ./route by default.
 
