@@ -39,6 +39,7 @@ app.use(session({
     secret: "xwertyuikmbvcxawefvhjiomntfdddfthjkmedcv",
     saveUninitialized: false,
     resave: false,
+    store: require('./config/mongodb_session_store'),
     cookie:{
         maxAge: (1000*60*100),
     }
