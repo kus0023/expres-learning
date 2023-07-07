@@ -1,12 +1,15 @@
+<link rel="stylesheet" href="/css/user_list.css">
+
+
 <h1>User List</h1>
 
 <br>
 
-<ol>
+<ul>
     <% for(let user of users){ %>
         <li> <%= user %></li>
     <% }  %>
-</ol>
+</ul>
 
 <form action="/users/add" method="post">
     <label for="username">username</label>

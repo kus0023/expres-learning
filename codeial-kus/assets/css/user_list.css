@@ -1,0 +1,12 @@
+ul{
+    padding: 0px;
+    list-style: none;
+    border: 2px solid palegreen;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+}
+
+ul>li:nth-child(even){
+    background-color: antiquewhite;
+}

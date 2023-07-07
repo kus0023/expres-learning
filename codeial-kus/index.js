@@ -19,6 +19,9 @@ app.use(express.urlencoded());
 
 //express ejs layout setup, It should be before routes middleware.
 app.use(expressLayouts);
+app.set("layout extractStyles", true); //link tag of current rendering ejs will placed inside layout(global) where <%- style %> is mentioned.
+app.set("layout extractStyles", true); //styyle tag of current rendering ejs will placed inside layout(global) where <%- script %> is mentioned.
+
 
 //Setting up routes in different folder
 app.use('/', require('./routes')); //This will invoke index.js inside ./route by default.
