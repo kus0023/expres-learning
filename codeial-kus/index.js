@@ -9,6 +9,11 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//Midlewares
+
+//Static files
+app.use(express.static("./assets"));
+
 //Form data
 app.use(express.urlencoded());
 

@@ -2,7 +2,7 @@
 const users = ['John Smith', 'Martin Roy', 'Karry Minati']
 
 module.exports.profile = function (req, res) {
-    return res.render("user_profile");
+    return res.render("user_profile", {title: "Profile page"});
 }
 
 //controller for adding user
@@ -16,5 +16,5 @@ module.exports.addUser = function (req, res){
 //User list controller
 module.exports.showUsers = function(req, res){
     
-    return res.render('user_list', {users});
+    return res.render('user_list', {users, title: "List of Users"});
 }
