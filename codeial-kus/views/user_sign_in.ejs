@@ -1,28 +1,27 @@
 <link rel="stylesheet" href="/css/user_sign_in.css">
 
+<section class="container mt-4">
 
-<div id="container">
-    <header>
-        <h1>Login </h1>
-    </header>
-    <main>
-        <form action="/users/login" method="post">
-            <div class="form-label-container">
-                <label for="email" class="form-label">Email</label>
-                <input name="email" type="email" id="email" class="form-input" placeholder="alexa@work.co" required>
+    <form action="/users/login" method="post">
+        <div class="row mb-3">
+            <h1>Login</h1>
+        </div>
+        <div class="row mb-3">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input name="email" type="email" id="email" class="form-control" placeholder="alexa@work.co" required>
             </div>
+        </div>
+        <div class="row mb-3">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input name="password" type="password" id="password" class="form-control"required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
 
-            <div class="form-label-container">
-                <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" id="password" class="form-input" required>
-            </div>
+</section>
 
-            <div class="form-button-container">
-                <button type="submit">Login</button>
-            </div>
-        </form>
-    </main>
-    <footer>
-        <p>Already a User? <a href="/users/sign-up">Register</a></p>
-    </footer>
-</div>
+
+

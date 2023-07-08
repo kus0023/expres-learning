@@ -1,36 +1,6 @@
 
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0px 20px;
-}
-
-ul{
-    padding: 0px;
-    list-style: none;
-    height: 100%;
-}
-
-/* li */
-.link-container { 
-    display: inline-block;
-    text-align: right;
-    height: 100%;
-
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-    font-weight: 700;
-}
-
-.link-container a {
-    height: 100%;
-    text-decoration: none;
-    color: black;
-}
-
-.link-container a:hover{
-    background-color: rgb(141, 141, 141);
-    color: white;
+@media screen and  (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse{
+        justify-content: flex-end;
+    }
 }
