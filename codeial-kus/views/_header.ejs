@@ -1,3 +1,25 @@
+<link rel="stylesheet" href="/css/_header.css">
+
 <header>
-    <h1>Header content</h1>
+    <div class="logo">
+        <h1>Codeial App</h1>
+    </div>
+
+    <ul>
+
+        <%if (locals.user) {%>
+            <li class="link-container">
+                <a href="/users/logout">Logout</a>
+            </li>
+        <%} else {%>
+            <li class="link-container">
+                <a href="/users/sign-in">Login</a>
+            </li>
+
+            <li class="link-container">
+                <a href="/users/sign-up">Register</a>
+            </li>
+        <%}%>
+        <li></li>
+    </ul>
 </header>

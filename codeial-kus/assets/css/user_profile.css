@@ -16,16 +16,3 @@ td{
     
     width: 50%;
 }
-
-#logout-container {
-    width: 90%;
-    text-align: right;
-
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-    font-weight: 700;
-}
-
-#logout-container a{
-    text-decoration: none;
-}
