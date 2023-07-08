@@ -1,8 +1,16 @@
 //module.exports.actions = fn
 
-module.exports.home = function (req, res) {
+const Post = require('../models/post');
 
-    console.log(req.cookies);
+module.exports.home = async function (req, res) {
 
-    return res.render("home", {title: "Home page"});
+    try {
+        const postDocs = await Post.find({}).populate('user');
+
+        return res.render("home", {title: "Home page", posts: postDocs});
+    } catch (err) {
+        console.log("Could not fetch Posts", err);
+        return res.status(500).send("Internal Server Error.");
+    }
+
 }
