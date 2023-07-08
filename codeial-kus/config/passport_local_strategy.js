@@ -85,4 +85,14 @@ passport.checkAlreadyLoggedIn = function (req, res, next){
     return res.redirect('/users/profile');
 }
 
+passport.logoutUser = function (req, res, next){
+
+    if(req.isAuthenticated()){
+        req.logout(function(err) {
+            if (err) { return next(err); }
+            return res.redirect('/users/sign-in');
+          });
+    }
+}
+
 module.exports = passport;

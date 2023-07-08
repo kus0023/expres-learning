@@ -12,4 +12,6 @@ router.get('/sign-in', passport.checkAlreadyLoggedIn, usersController.getSignIn)
 router.post('/login', passport.authenticate('local', {failureRedirect: '/users/sign-in'}), usersController.login);
 router.post('/register', usersController.register);
 
+router.get('/logout', passport.logoutUser);
+
 module.exports = router;
