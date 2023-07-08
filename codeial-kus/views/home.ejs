@@ -35,6 +35,74 @@
             <p><%= post.content %></p>
           </blockquote>
         </div>
+
+        <!-- Collapsed component used for comment form -->
+        <div class="container">
+          <div class="card-footer row comment-btn-no-outline" >
+            <button type="button" class="btn btn-light btn-lg col-4">Like</button>
+            <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'read_'+post.id%>" 
+            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>">View Comments</button>
+            <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'post_'+post.id%>" 
+              aria-expanded="false" aria-controls="<%= 'post_'+post.id%>">Reply</button>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------Comment section---------------------------------------------------------- -->
+
+        <!-- If user is not logged in then he will not be able to comment on Post. -->
+        <% if(locals.user) {%> 
+          <div class="collapse" id="<%= 'post_'+post.id%>">
+            <div class="card card-body">
+              <form action="">
+                <div class="input-group mb-3">
+                    <!-- Hidden Input will be used to send comment for specific post and user -->
+                    <input type="hidden" name="post_id" value="<%= post.id %>" >
+                    <input type="hidden" name="user_id" value="<%= locals.user.id %>" >
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        <% } else  {%>
+          <div class="collapse" id="<%= 'post_'+post.id%>">
+            <div class="card card-body text-center">
+              Please login to comment <a class="btn btn-danger" href="/users/sign-in">Login</a>
+            </div>
+          </div>
+        <% } %>
+        
+
+        <!-- Collapse: List of comments Apears when user click on view comments-->
+        <div class="collapse" id="<%= 'read_'+post.id%>"><div class="list-group container text-center">
+
+          <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">List group item heading</h5>
+              <small>3 days ago</small>
+            </div>
+            <p class="mb-1">Some placeholder content in a paragraph.</p>
+            <small>And some small print.</small>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">List group item heading</h5>
+              <small class="text-muted">3 days ago</small>
+            </div>
+            <p class="mb-1">Some placeholder content in a paragraph.</p>
+            <small class="text-muted">And some muted small print.</small>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">List group item heading</h5>
+              <small class="text-muted">3 days ago</small>
+            </div>
+            <p class="mb-1">Some placeholder content in a paragraph.</p>
+            <small class="text-muted">And some muted small print.</small>
+          </a>
+        </div></div>
+        
+        
       </div>
     <%}%>
   </section>

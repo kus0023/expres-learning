@@ -13,3 +13,7 @@
     left: 0;
     max-height: 500px;
 }
+
+.comment-btn-no-outline > button:focus{
+  box-shadow: none;
+}
