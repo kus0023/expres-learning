@@ -1,5 +1,18 @@
+<link rel="stylesheet" href="/css/user_profile.css">
+
 <h1><u>User Profile</u></h1>
 
-<br>
-<p>This is My Profile. I am a good person.</p>
-<br>
+<table>
+    <tr>
+        <td>Name</td>
+        <td><%= user.name %></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td><%= user.email %></td>
+    </tr>
+    <tr>
+        <td>Created At</td>
+        <td><%= new Date(user.createdAt).toDateString() %></td>
+    </tr>
+</table>
