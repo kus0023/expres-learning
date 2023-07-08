@@ -2,23 +2,26 @@
 
 <section id="home-main" class="container">
 
-  <section id="post-feed" class="mt-4 sticky-lg-top">
-    <div class="card">
-      <h5 class="card-header">Have something in Mind?</h5>
-      <div class="card-body">
-        <!-- <p class="card-text">Let your friends know what you have done today!</p> -->
-        <form action="/posts/create" method="POST">
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label"></label>
-            <textarea name="content" class="form-control" id="message-text" rows="3"
-              placeholder="Write here ..."></textarea>
-          </div>
+  <!-- Form will only be visible to authenticated user, Although one check needed at router level as well -->
+  <% if(locals.user) {%>
+    <section id="post-feed" class="mt-4 sticky-lg-top">
+      <div class="card">
+        <h5 class="card-header">Have something in Mind?</h5>
+        <div class="card-body">
+          <!-- <p class="card-text">Let your friends know what you have done today!</p> -->
+          <form action="/posts/create" method="POST">
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label"></label>
+              <textarea name="content" class="form-control" id="message-text" rows="3"
+                placeholder="Write here ..."></textarea>
+            </div>
 
-          <button type="submit" class="btn btn-primary">Post</button>
-        </form>
+            <button type="submit" class="btn btn-primary">Post</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <% } %>
 
   <section id="posts-list" class="mt-4 text-start">
 
