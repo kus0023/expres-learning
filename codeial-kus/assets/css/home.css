@@ -1,3 +1,7 @@
+#post-feed{
+  text-align: start;
+}
+
 .carousel .item {
     height: 500px;
   }
