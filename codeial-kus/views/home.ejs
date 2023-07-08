@@ -39,9 +39,9 @@
         <!-- Collapsed component used for comment form -->
         <div class="container">
           <div class="card-footer row comment-btn-no-outline" >
-            <button type="button" class="btn btn-light btn-lg col-4">Like</button>
+            <button type="button" class="btn btn-light btn-lg col-4"><span class="badge bg-success">4</span> Like </button>
             <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'read_'+post.id%>" 
-            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>">View Comments</button>
+            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>"><span class="badge bg-warning">3</span> Comments</button>
             <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'post_'+post.id%>" 
               aria-expanded="false" aria-controls="<%= 'post_'+post.id%>">Reply</button>
           </div>
