@@ -41,7 +41,7 @@
           <div class="card-footer row comment-btn-no-outline" >
             <button type="button" class="btn btn-light btn-lg col-4"><span class="badge bg-success">4</span> Like </button>
             <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'read_'+post.id%>" 
-            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>"><span class="badge bg-warning">3</span> Comments</button>
+            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>"><span class="badge bg-info"><%= post.comments.length %></span> Comments</button>
             <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'post_'+post.id%>" 
               aria-expanded="false" aria-controls="<%= 'post_'+post.id%>">Reply</button>
           </div>
@@ -73,33 +73,20 @@
         
 
         <!-- Collapse: List of comments Apears when user click on view comments-->
-        <div class="collapse" id="<%= 'read_'+post.id%>"><div class="list-group container text-center">
-
-          <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small>3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small>And some small print.</small>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small class="text-muted">And some muted small print.</small>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">List group item heading</h5>
-              <small class="text-muted">3 days ago</small>
-            </div>
-            <p class="mb-1">Some placeholder content in a paragraph.</p>
-            <small class="text-muted">And some muted small print.</small>
-          </a>
-        </div></div>
+        <div class="collapse" id="<%= 'read_'+post.id%>" id="comments-list">
+          <div class="list-group" >
+            <% for(comment of post.comments) {%>
+              <a href="#" class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1"><%= comment.user.name %></h6>
+                  <small><%= comment.createdAt %></small>
+                </div>
+                <p class="mb-1"><%= comment.content %></p>
+                <small></small>
+              </a>
+            <% } %>
+          </div>
+        </div>
         
         
       </div>
