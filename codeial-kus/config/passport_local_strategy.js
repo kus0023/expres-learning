@@ -90,7 +90,7 @@ passport.logoutUser = function (req, res, next){
     if(req.isAuthenticated()){
         req.logout(function(err) {
             if (err) { return next(err); }
-            return res.redirect('/users/sign-in');
+            return res.redirect('/');
           });
     }
 }
