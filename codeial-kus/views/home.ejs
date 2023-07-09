@@ -26,20 +26,25 @@
   <section id="posts-list" class="mt-4 text-start">
 
     <% for(post of posts) {%>
-      <div class="card mt-4 <%= locals.user.id == post.user.id ? "border-success shadow":""%>">
+      <div class="card mt-4 <%= locals.user && locals.user.id == post.user.id ? "border-success shadow":""%>">
         <div class="card-header">
+          <!-- Delete button of Post -->
+          <% if(locals.user && post.user.id == locals.user.id) {%>
+            <ul class="nav card-header-pills float-end">
+              <li class="nav-item">
+                <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end">Delete</a>
+              </li>
+            </ul>
+          <% } %>
           <h5>
-            <% if(locals.user.id == post.user.id) {%>
+            <% if(locals.user && locals.user.id == post.user.id) {%>
               <span class="badge bg-secondary">You</span>
             <% } %>
             <%= post.user.name %> 
             
           </h5>
           <span class="text-muted col-8"><%= post.createdAt %></span>
-
-          <% if(locals.user && post.user.id == locals.user.id) {%>
-            <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end">Delete</a>
-          <% } %>
+         
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -84,17 +89,24 @@
         
 
         <!-- Collapse: List of comments Apears when user click on view comments-->
-        <div class="collapse " id="<%= 'read_'+post.id%>" id="comments-list">
+        <div class="collapse" id="<%= 'read_'+post.id%>" id="comments-list">
           <div class="list-group " >
             <% for(comment of post.comments) {%>
-              <a href="#" class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
+              <div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                   <h6 class="mb-1"><%= comment.user.name %></h6>
                   <small><%= comment.createdAt %></small>
                 </div>
-                <p class="mb-1"><%= comment.content %></p>
-                <small></small>
-              </a>
+                <div class="row justify-content-between">
+                  <p class="mb-1 col-8"><%= comment.content %></p>
+                  <div class="text-end col-2">
+                    <% if(locals.user && (post.user.id == locals.user.id || comment.user.id == locals.user.id)) {%>
+                      <a href="/comments/delete?post_id=<%= post.id %>&comment_id=<%= comment.id %>" class="btn btn-sm btn-danger" >Delete</a>
+                    <% } %>
+                  </div>
+                </div>
+                
+              </div>
             <% } %>
           </div>
         </div>
