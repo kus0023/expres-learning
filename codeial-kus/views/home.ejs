@@ -13,7 +13,7 @@
             <div class="mb-3">
               <label for="message-text" class="col-form-label"></label>
               <textarea name="content" class="form-control" id="message-text" rows="3"
-                placeholder="Write here ..."></textarea>
+                placeholder="Write here ..." required></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Post</button>
@@ -57,8 +57,8 @@
                 <div class="input-group mb-3">
                     <!-- Hidden Input will be used to send comment for specific post and user -->
                     <input type="hidden" name="post_id" value="<%= post.id %>" >
-                    <input name="content" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
+                    <input name="content" type="text" class="form-control" placeholder="Reply..." aria-label="Comment" aria-describedby="button-comment" required>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-comment">Comment</button>
                 </div>
               </form>
             </div>

@@ -6,7 +6,7 @@ module.exports.home = async function (req, res) {
 
     try {
         const postDocs = await Post.find({}).populate('user')
-        .populate({path: 'comments', model: 'comment', populate: 'user'});
+        .populate({path: 'comments', model: 'Comment', populate: 'user'}).sort({createdAt: -1});
 
         return res.render("home", {title: "Home page", posts: postDocs, user: req.user});
     } catch (err) {

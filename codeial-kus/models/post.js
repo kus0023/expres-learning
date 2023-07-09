@@ -7,20 +7,20 @@ const postSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: 'user',
+        ref: 'User',
         required: true,
     },
     //Include the comments Id becauase fetching is frequent
     comments: [
         {
             type: mongoose.SchemaTypes.ObjectId,
-            ref: 'comment',
+            ref: 'Comment',
         }
     ]
 },
 {timestamps: true});
 
 
-const Post = mongoose.model('post', postSchema);
+const Post = mongoose.model('Post', postSchema);
 
 module.exports = Post;

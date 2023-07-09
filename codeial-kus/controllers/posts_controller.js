@@ -9,7 +9,7 @@ module.exports.create = async function (req, res){
             user: req.user.id
         });
 
-        console.log(`Post saved ${postDoc} by user ${req.user.name}`);
+        // console.log(`Post saved ${postDoc} by user ${req.user.name}`);
 
         return res.redirect('back');
     } catch (err) {

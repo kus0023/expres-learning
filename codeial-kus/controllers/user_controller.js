@@ -46,16 +46,14 @@ module.exports.register = async function (req, res) {
         //check if user is alredy present or not. if not then create a new user. otherwise do not create.
 
         const userExists = await Users.findOne({ email: req.body.email });
-        const nullUser = await Users.findOne({emails: null});
-        console.log("Null users: ", nullUser);
 
         if (!userExists) {
-            console.log("Creating user");
-            console.log(req.body);
+            // console.log("Creating user");
+            // console.log(req.body);
 
             const userDoc = await Users.create(req.body);
 
-            console.log("User created Successfully.", userDoc);
+            // console.log("User created Successfully.", userDoc);
 
             return res.redirect('/users/sign-in');
         } else {

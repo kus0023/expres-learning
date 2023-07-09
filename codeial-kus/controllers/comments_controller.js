@@ -3,7 +3,7 @@ const Post = require('../models/post');
 
 module.exports.create = async function(req, res){
 
-    console.log("Creating comments: ", req.body);
+    // console.log("Creating comments: ", req.body);
 
     let postDoc;
 
@@ -12,7 +12,7 @@ module.exports.create = async function(req, res){
         postDoc = await Post.findById(req.body.post_id);
 
     }catch(err){
-        console.log(`Post with Id: ${req.body.post_id} Not found.`);
+        // console.log(`Post with Id: ${req.body.post_id} Not found.`);
         return res.redirect('/');
     }
 
@@ -32,7 +32,7 @@ module.exports.create = async function(req, res){
 
             const updatedPostDoc = await postDoc.save({isNew: false});
 
-            console.log(`Updated post doc has been saved. Post Doc: ${updatedPostDoc}`);
+            // console.log(`Updated post doc has been saved. Post Doc: ${updatedPostDoc}`);
 
             return res.redirect('/');
         }else{
