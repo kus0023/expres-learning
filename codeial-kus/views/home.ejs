@@ -27,18 +27,23 @@
       
       <%- include('_posts') -%>
     </section>
-    <aside class="col-sm-12 col-md-4">
+    <aside class="col-sm-12 col-md-4 border-start text-start">
       <section class="sticky-top" id="friends-section">
         <h1>Friends</h1>
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
 
-          <% for(friend of locals.friends) {%>
+          <% if(locals.user) {%>
+            <% for(friend of locals.friends) {%>
 
-            <!-- Self Id in friend list should not be there. -->
-            <% if(friend.id == locals.user.id) continue;%>
-          
-          <li class="list-group-item"> <a href="/users/profile?user_id=<%= friend.id %>"><%= friend.name %></a> </li>
+              <!-- Self Id in friend list should not be there. -->
+              <% if(friend.id != locals.user.id) {%>
+            
+                <li class="list-group-item "> <a href="/users/profile?user_id=<%= friend.id %>"><%= friend.name %></a> </li>
 
+              <% } %>
+            <% } %>
+          <% } else{%>
+            Login to see Friends <a href="/users/sign-in">Login</a>
           <% } %>
         </ul>
       </section>
