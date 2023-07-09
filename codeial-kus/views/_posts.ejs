@@ -1,0 +1,48 @@
+<section id="posts-list" class="mt-4 text-start">
+
+    <% for(post of posts) {%>
+      <div class="card mt-4 <%= locals.user && locals.user.id == post.user.id ? "border-success shadow":""%>">
+        <div class="card-header">
+          <!-- Delete button of Post -->
+          <% if(locals.user && post.user.id == locals.user.id) {%>
+            <ul class="nav card-header-pills float-end">
+              <li class="nav-item">
+                <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end">Delete</a>
+              </li>
+            </ul>
+          <% } %>
+          <h5>
+            <% if(locals.user && locals.user.id == post.user.id) {%>
+              <span class="badge bg-secondary">You</span>
+            <% } %>
+            <%= post.user.name %> 
+            
+          </h5>
+          <span class="text-muted col-8"><%= post.createdAt %></span>
+         
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= post.content %></p>
+          </blockquote>
+        </div>
+
+        <!-- Collapsed component button used for comment form -->
+        <div class="container">
+          <div class="card-footer row comment-btn-no-outline" >
+            <button type="button" class="btn btn-light btn-lg col-4"><span class="badge bg-success">4</span> Like </button>
+            <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'read_'+post.id%>" 
+            aria-expanded="false" aria-controls="<%= 'read_'+post.id%>"><span class="badge bg-info"><%= post.comments.length %></span> Comments</button>
+            <button type="button" class="btn btn-light btn-lg col-4" data-bs-toggle="collapse" data-bs-target="#<%= 'post_'+post.id%>" 
+              aria-expanded="false" aria-controls="<%= 'post_'+post.id%>">Reply</button>
+          </div>
+        </div>
+
+        <!-- -------------------------------------------------Comment section---------------------------------------------------------- -->
+
+        <%- include('_comments') %>
+        
+        
+      </div>
+    <%}%>
+  </section>

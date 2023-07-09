@@ -1,0 +1,45 @@
+<!-- If user is not logged in then he will not be able to comment on Post. -->
+<% if(locals.user) {%> 
+    <div class="collapse" id="<%= 'post_'+post.id%>">
+      <div class="card card-body">
+        <form action="/comments/create" method="post">
+          <div class="input-group mb-3">
+              <!-- Hidden Input will be used to send comment for specific post and user -->
+              <input type="hidden" name="post_id" value="<%= post.id %>" >
+              <input name="content" type="text" class="form-control" placeholder="Reply..." aria-label="Comment" aria-describedby="button-comment" required>
+              <button class="btn btn-outline-secondary" type="submit" id="button-comment">Comment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <% } else  {%>
+    <div class="collapse" id="<%= 'post_'+post.id%>">
+      <div class="card card-body text-center">
+        Please login to comment <a class="btn btn-danger" href="/users/sign-in">Login</a>
+      </div>
+    </div>
+  <% } %>
+  
+
+  <!-- Collapse: List of comments Apears when user click on view comments-->
+  <div class="collapse" id="<%= 'read_'+post.id%>" id="comments-list">
+    <div class="list-group " >
+      <% for(comment of post.comments) {%>
+        <div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1"><%= comment.user.name %></h6>
+            <small><%= comment.createdAt %></small>
+          </div>
+          <div class="row justify-content-between">
+            <p class="mb-1 col-8"><%= comment.content %></p>
+            <div class="text-end col-2">
+              <% if(locals.user && (post.user.id == locals.user.id || comment.user.id == locals.user.id)) {%>
+                <a href="/comments/delete?post_id=<%= post.id %>&comment_id=<%= comment.id %>" class="btn btn-sm btn-danger" >Delete</a>
+              <% } %>
+            </div>
+          </div>
+          
+        </div>
+      <% } %>
+    </div>
+  </div>
