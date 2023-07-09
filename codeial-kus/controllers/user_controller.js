@@ -5,14 +5,6 @@ module.exports.profile = function (req, res) {
     return res.render("user_profile", { title: "Profile page" });
 }
 
-//controller for adding user
-module.exports.addUser = function (req, res) {
-
-    console.log("User added Successfully.");
-    users.push(req.body.username);
-    return res.redirect("/users/list");
-}
-
 //User list controller
 module.exports.showUsers = function (req, res) {
 
@@ -33,7 +25,7 @@ module.exports.getSignUp = function (req, res) {
 //use to register user in database
 module.exports.register = async function (req, res) {
 
-    console.log("Trying to create a user");
+    // console.log("Trying to create a user");
 
     //Check if password and confirm password is same or not.
     if (req.body.password != req.body.confirm_password) {

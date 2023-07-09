@@ -27,7 +27,7 @@ module.exports.delete = async function (req, res){
     try {
         const postDoc = await Post.findById(req.query.post_id);
 
-        console.log(postDoc.user.id, req.user.id, typeof postDoc.user.id, typeof req.user.id);
+        // console.log(postDoc.user.id, req.user.id, typeof postDoc.user.id, typeof req.user.id);
         
         if(postDoc.user._id == req.user.id) //Checking if authenticated user is deleting post
         {

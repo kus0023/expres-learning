@@ -48,7 +48,7 @@ module.exports.create = async function(req, res){
 module.exports.delete = async function(req, res){
     try {
 
-        console.log("Finding post and comments");
+        // console.log("Finding post and comments");
 
         const postDoc = await Post.findById(req.query.post_id)
         const commentsDoc = await Comment.findById(req.query.comment_id);
@@ -60,21 +60,21 @@ module.exports.delete = async function(req, res){
         const postBelongsToAuthenticatedUser = req.user.id == postDoc.user._id;
         const commentBelongsToAuthenticatedUser = req.user.id == commentsDoc.user._id;
         
-        console.log("Checking for confition.");
+        // console.log("Checking for confition.");
         if(commentBelongsToPost && (postBelongsToAuthenticatedUser || commentBelongsToAuthenticatedUser)){
 
-            console.log("User is Eligible to delete.");
+            // console.log("User is Eligible to delete.");
             //Find the index of comment id in post.
             const indexOfComment = postDoc.comments.findIndex((commentId)=>commentId == req.query.comment_id);
             postDoc.comments.splice(indexOfComment, 1);
             const updatedPostDoc = await postDoc.save();
 
-            console.log("Deleted comment from post.");
+            // console.log("Deleted comment from post.");
 
             //Delete the comment.
             const deleteCommentResult = await Comment.findByIdAndDelete(req.query.comment_id).exec();
 
-            console.log("Deleted Actual comment");
+            // console.log("Deleted Actual comment");
 
             return res.redirect('/');
         }else{
