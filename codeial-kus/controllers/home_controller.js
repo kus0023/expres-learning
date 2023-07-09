@@ -5,7 +5,8 @@ const Post = require('../models/post');
 module.exports.home = async function (req, res) {
 
     try {
-        const postDocs = await Post.find({}).populate('user');
+        const postDocs = await Post.find({}).populate('user')
+        .populate({path: 'comments', model: 'comment', populate: 'user'});
 
         return res.render("home", {title: "Home page", posts: postDocs, user: req.user});
     } catch (err) {

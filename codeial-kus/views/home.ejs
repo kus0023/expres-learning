@@ -22,7 +22,7 @@
       </div>
     </section>
   <% } %>
-
+  
   <section id="posts-list" class="mt-4 text-start">
 
     <% for(post of posts) {%>
@@ -53,12 +53,11 @@
         <% if(locals.user) {%> 
           <div class="collapse" id="<%= 'post_'+post.id%>">
             <div class="card card-body">
-              <form action="">
+              <form action="/comments/create" method="post">
                 <div class="input-group mb-3">
                     <!-- Hidden Input will be used to send comment for specific post and user -->
                     <input type="hidden" name="post_id" value="<%= post.id %>" >
-                    <input type="hidden" name="user_id" value="<%= locals.user.id %>" >
-                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input name="content" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Comment</button>
                 </div>
               </form>
