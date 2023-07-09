@@ -4,7 +4,7 @@
 
   <!-- Form will only be visible to authenticated user, Although one check needed at router level as well -->
   <% if(locals.user) {%>
-    <section id="post-feed" class="mt-4 sticky-lg-top">
+    <section id="post-feed" class="shadow mt-4 sticky-lg-top">
       <div class="card">
         <h5 class="card-header">Have something in Mind?</h5>
         <div class="card-body">
@@ -12,7 +12,7 @@
           <form action="/posts/create" method="POST">
             <div class="mb-3">
               <label for="message-text" class="col-form-label"></label>
-              <textarea name="content" class="form-control" id="message-text" rows="3"
+              <textarea name="content" class="form-control" id="message-text" rows="1"
                 placeholder="Write here ..." required></textarea>
             </div>
 
@@ -26,9 +26,15 @@
   <section id="posts-list" class="mt-4 text-start">
 
     <% for(post of posts) {%>
-      <div class="card mt-4">
+      <div class="card mt-4 <%= locals.user.id == post.user.id ? "border-success shadow":""%>">
         <div class="card-header">
-          <h5><%= post.user.name %></h5>
+          <h5>
+            <% if(locals.user.id == post.user.id) {%>
+              <span class="badge bg-secondary">You</span>
+            <% } %>
+            <%= post.user.name %> 
+            
+          </h5>
           <span class="text-muted col-8"><%= post.createdAt %></span>
 
           <% if(locals.user && post.user.id == locals.user.id) {%>
@@ -78,8 +84,8 @@
         
 
         <!-- Collapse: List of comments Apears when user click on view comments-->
-        <div class="collapse" id="<%= 'read_'+post.id%>" id="comments-list">
-          <div class="list-group" >
+        <div class="collapse " id="<%= 'read_'+post.id%>" id="comments-list">
+          <div class="list-group " >
             <% for(comment of post.comments) {%>
               <a href="#" class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
