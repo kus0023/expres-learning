@@ -28,7 +28,12 @@
     <% for(post of posts) {%>
       <div class="card mt-4">
         <div class="card-header">
-          <h5><%= post.user.name %></h5><span class="text-muted"><%= post.createdAt %></span>
+          <h5><%= post.user.name %></h5>
+          <span class="text-muted col-8"><%= post.createdAt %></span>
+
+          <% if(locals.user && post.user.id == locals.user.id) {%>
+            <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end">Delete</a>
+          <% } %>
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -36,7 +41,7 @@
           </blockquote>
         </div>
 
-        <!-- Collapsed component used for comment form -->
+        <!-- Collapsed component button used for comment form -->
         <div class="container">
           <div class="card-footer row comment-btn-no-outline" >
             <button type="button" class="btn btn-light btn-lg col-4"><span class="badge bg-success">4</span> Like </button>

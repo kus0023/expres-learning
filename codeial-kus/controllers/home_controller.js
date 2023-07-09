@@ -1,6 +1,6 @@
 //module.exports.actions = fn
 
-const Post = require('../models/post');
+const Post = require('../models/Post');
 
 module.exports.home = async function (req, res) {
 
