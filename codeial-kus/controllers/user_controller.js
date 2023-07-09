@@ -1,14 +1,48 @@
 
-const Users = require("../models/User")
+const User = require("../models/User")
 
-module.exports.profile = function (req, res) {
-    return res.render("user_profile", { title: "Profile page" });
+module.exports.viewProfile = async function (req, res) {
+    try {
+
+        const profileUser = await User.findById(req.query.user_id);
+
+        return res.render("user_profile", { title: "Profile page", user_profile: profileUser });
+        
+    } catch (err) {
+        console.log("Error fetching profile data", err);
+        return res.render('back');
+    }
+    
 }
 
-//User list controller
-module.exports.showUsers = function (req, res) {
+module.exports.updateProfile = async function (req, res) {
+    try {
 
-    return res.render('user_list', { users, title: "List of Users" });
+        // console.log(req.user, req.body.user_id);
+
+        if(req.user._id == req.body.user_id){
+            const user = await User.findById(req.body.user_id);
+            if(req.body.user_name.trim() != ""){
+                const result = await user.updateOne({name: req.body.user_name}).exec();
+                console.log("profile updated.");
+
+                return res.render('back');
+            }else{
+
+                console.log("name is empty.");
+                return res.render('back');
+            }
+        }else{
+            console.log("User is not authorised to update profile.");
+            return res.redirect('back');
+        }
+        
+        
+    } catch (err) {
+        console.log("Error updating profile data", err);
+        return res.render('back');
+    }
+    
 }
 
 //use to get the Page to login
@@ -37,13 +71,13 @@ module.exports.register = async function (req, res) {
 
         //check if user is alredy present or not. if not then create a new user. otherwise do not create.
 
-        const userExists = await Users.findOne({ email: req.body.email });
+        const userExists = await User.findOne({ email: req.body.email });
 
         if (!userExists) {
             // console.log("Creating user");
             // console.log(req.body);
 
-            const userDoc = await Users.create(req.body);
+            const userDoc = await User.create(req.body);
 
             // console.log("User created Successfully.", userDoc);
 
