@@ -24,16 +24,19 @@ module.exports.updateProfile = async function (req, res) {
             const user = await User.findById(req.body.user_id);
             if(req.body.user_name.trim() != ""){
                 const result = await user.updateOne({name: req.body.user_name}).exec();
-                console.log("profile updated.");
+                // console.log("profile updated.");
 
+                req.flash('success', "Profile Updated successfully.");
                 return res.render('back');
             }else{
 
                 console.log("name is empty.");
+                req.flash('failure', "Name cannot be empty");
                 return res.render('back');
             }
         }else{
             console.log("User is not authorised to update profile.");
+            req.flash('failure', "Unauthorised");
             return res.redirect('back');
         }
         
