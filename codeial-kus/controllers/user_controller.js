@@ -63,7 +63,8 @@ module.exports.register = async function (req, res) {
 
     //Check if password and confirm password is same or not.
     if (req.body.password != req.body.confirm_password) {
-        console.log("Password is not Matching.");
+        // console.log("Password is not Matching.");
+        req.flash('failure', "Password is not Matching.");
         return res.redirect('back');
     }
 
@@ -81,9 +82,11 @@ module.exports.register = async function (req, res) {
 
             // console.log("User created Successfully.", userDoc);
 
+            req.flash("success", "Registered successfully! Please login.");
             return res.redirect('/users/sign-in');
         } else {
-            console.log("User already exists");
+            // console.log("User already exists");
+            req.flash('failure', "User already exists with that email");
             return res.redirect('back')
         }
 
@@ -96,7 +99,7 @@ module.exports.register = async function (req, res) {
 
 // Now using passport to handle login and session managment.
 module.exports.login = function (req, res) {
-    req.flash('success', `Welcome ${req.user.name} ! You are successfully logged in.`)
+    req.flash('success', `Welcome ${req.user.name}`);
     return res.redirect("/");
 }
 
