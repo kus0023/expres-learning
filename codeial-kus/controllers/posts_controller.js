@@ -32,6 +32,7 @@ module.exports.delete = async function (req, res){
             // console.log("Deleting post");
             await postDoc.deleteOne();
 
+            
             req.flash('warning', "Post deleted Successfully");
 
             // console.log("deleting comments");
