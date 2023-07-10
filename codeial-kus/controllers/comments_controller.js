@@ -33,10 +33,11 @@ module.exports.create = async function(req, res){
             const updatedPostDoc = await postDoc.save({isNew: false});
 
             // console.log(`Updated post doc has been saved. Post Doc: ${updatedPostDoc}`);
-
+            req.flash('success', "Comment Added successfully");
             return res.redirect('/');
         }else{
-            throw "Error Post Doc not found";
+            req.flash('failure', "Post is not found");
+            return res.redirect('/');
         }
     } catch (err) {
         console.log("Error in adding comments: ", err);
@@ -76,14 +77,18 @@ module.exports.delete = async function(req, res){
 
             // console.log("Deleted Actual comment");
 
+            req.flash('success', "Comment deleted successfully");
+
             return res.redirect('/');
         }else{
+            req.flash('failure', "Unauthorised User");
             console.log("Permission denied for user to delete the comment.");
             return res.redirect('/');
         }
         
     } catch (err) {
         console.log("Error in deleting comment", err);
+        req.flash('failure', "Something Wrong happend while deleting the comment");
         return res.redirect('/');
     }
 }
