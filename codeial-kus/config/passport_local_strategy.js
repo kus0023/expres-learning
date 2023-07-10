@@ -4,8 +4,9 @@ const User = require('../models/User');
 const LocalStrategy = require('passport-local').Strategy;
 
 const localStrategy = new LocalStrategy({
-    usernameField: 'email'
-}, async function (email, password, done) {
+    usernameField: 'email',
+    passReqToCallback: true //It allow us to pass the request object in call back fn in first param.
+}, async function (req, email, password, done) {
 
     try {
 
@@ -17,6 +18,7 @@ const localStrategy = new LocalStrategy({
             return done(null, false, {type:'failure', message: "Invalid username/password"});
         }
 
+        req.flash('success', 'Successfully Logged in.');
         return done(null, user);
 
     } catch (error) {
