@@ -3,7 +3,7 @@
 <h1><u>User Profile</u></h1>
 
 <div class="container text-start">
-    <% if(locals.user && locals.user.id == user_profile.id) {%>
+    <% if(locals.user && locals.user_profile && user.id == user_profile.id) {%>
         <div class="card mb-3 p-3">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -13,18 +13,18 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <%= user_profile.name %>
+                            <%= locals.user_profile.name %>
                         </h5>
                         <p class="card-text">
-                            <%= user_profile.email %>
+                            <%= locals.user_profile.email %>
                         </p>
-                        <p class="card-text"><small class="text-muted">Updated At: <%= user_profile.updatedAt %></small></p>
+                        <p class="card-text"><small class="text-muted">Updated At: <%= locals.user_profile.updatedAt %></small></p>
     
                         <form action="/users/profile" method="POST">
                             <div class="input-group mb-3">
-                                <input type="hidden" name="user_id" value="<%= user_profile.id %>" >
+                                <input type="hidden" name="user_id" value="<%= locals.user_profile.id %>" >
                                 <input type="text" class="form-control" placeholder="Put your name to udpate" aria-label="Recipient's name"
-                                    aria-describedby="button-addon2" name="user_name" value="<%= user_profile.name %>" required>
+                                    aria-describedby="button-addon2" name="user_name" value="<%= locals.user_profile.name %>" required>
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Update</button>
                             </div>
                         </form>
