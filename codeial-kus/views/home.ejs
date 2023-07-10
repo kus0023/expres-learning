@@ -3,8 +3,9 @@
 <section class="container">
 
   <div class="row m-auto row g-4">
-    <section class="col-sm-12 col-md-8">
-          <!-- Form will only be visible to authenticated user, Although one check needed at router level as well -->
+    <section class="col-sm-12 col-md-9">
+       <div class="container">
+           <!-- Form will only be visible to authenticated user, Although one check needed at router level as well -->
       <% if(locals.user) {%>
         <section id="post-feed" class="shadow mt-4 sticky-lg-top">
           <div class="card">
@@ -26,8 +27,9 @@
       <% } %>
       
       <%- include('_posts') -%>
+       </div>
     </section>
-    <aside class="col-sm-12 col-md-4 border-start text-start">
+    <aside class="col-sm-12 col-md-3 border-start text-start">
       <section class="sticky-top" id="friends-section">
         <h1>Friends</h1>
         <ul class="list-group list-group-flush">
