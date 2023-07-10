@@ -10,8 +10,7 @@ router.post('/profile', passport.checkAuthentication, usersController.updateProf
 router.get('/sign-up', passport.checkAlreadyLoggedIn, usersController.getSignUp);
 router.get('/sign-in', passport.checkAlreadyLoggedIn, usersController.getSignIn);
 
-router.post('/login', passport.authenticate('local', 
-{failureRedirect: '/users/sign-in', successRedirect:"/"}));
+router.post('/login', passport.authenticate('local', {failureRedirect: '/users/sign-in', failureFlash: true}), usersController.login);
 
 router.post('/register', usersController.register);
 

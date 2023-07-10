@@ -96,7 +96,7 @@ module.exports.register = async function (req, res) {
 
 // Now using passport to handle login and session managment.
 module.exports.login = function (req, res) {
-
+    req.flash('success', `Welcome ${req.user.name} ! You are successfully logged in.`)
     return res.redirect("/");
 }
 

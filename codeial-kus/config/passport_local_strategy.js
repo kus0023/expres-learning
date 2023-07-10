@@ -14,10 +14,10 @@ const localStrategy = new LocalStrategy({
 
         if (!user || user.password != password) {
             console.log("Invalid username/password");
-            return done(null, false);
+            return done(null, false, {type:'failure', message: "Invalid username/password"});
         }
 
-        return done(null, user);
+        return done(null, user,  {type:'success', message: "Invalid username/password"});
 
     } catch (error) {
         console.log("Error in Passport: ", error);
@@ -82,14 +82,19 @@ passport.checkAlreadyLoggedIn = function (req, res, next){
         return next();
     }
 
-    return res.redirect('/users/profile');
+    return res.redirect('/');
 }
 
 passport.logoutUser = function (req, res, next){
 
     if(req.isAuthenticated()){
+       
         req.logout(function(err) {
-            if (err) { return next(err); }
+            if (err) {
+                req.flash('failure', 'Logout failed.') 
+                return next(err); 
+            }
+            req.flash('success', 'Logged out successfully.')
             return res.redirect('/');
           });
     }
