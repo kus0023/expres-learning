@@ -17,7 +17,7 @@ const localStrategy = new LocalStrategy({
             return done(null, false, {type:'failure', message: "Invalid username/password"});
         }
 
-        return done(null, user,  {type:'success', message: "Invalid username/password"});
+        return done(null, user);
 
     } catch (error) {
         console.log("Error in Passport: ", error);
