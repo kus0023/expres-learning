@@ -4,6 +4,8 @@ const path = require("path");
 const expressLayouts = require('express-ejs-layouts'); //It will lookup for layout.ejs in /views by default.
 const session = require('express-session'); //Used for session management
 const passport = require('passport'); // used for authentication with different strategies
+const flash = require('connect-flash'); // Sent some notification to users. 
+const customMiddlewares = require('./config/middlewares');
 
 //Add manual made local strategy
 const localStrategyPassport = require('./config/passport_local_strategy');
@@ -49,6 +51,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+// Flash message setup
+app.use(flash());
+app.use(customMiddlewares.setFlash); //custom middleware to set flash in response object of each req.
 
 //Setting up routes in different folder
 app.use('/', require('./routes')); //This will invoke index.js inside ./route by default.
