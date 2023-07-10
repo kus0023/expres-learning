@@ -27,12 +27,12 @@ module.exports.updateProfile = async function (req, res) {
                 // console.log("profile updated.");
 
                 req.flash('success', "Profile Updated successfully.");
-                return res.render('back');
+                return res.redirect('back');
             }else{
 
                 console.log("name is empty.");
                 req.flash('failure', "Name cannot be empty");
-                return res.render('back');
+                return res.redirect('back');
             }
         }else{
             console.log("User is not authorised to update profile.");
