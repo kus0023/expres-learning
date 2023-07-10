@@ -91,10 +91,10 @@ passport.logoutUser = function (req, res, next){
        
         req.logout(function(err) {
             if (err) {
-                req.flash('failure', 'Logout failed.') 
+                req.flash('failure', 'Logout Attempt failed.');
                 return next(err); 
             }
-            req.flash('success', 'Logged out successfully.')
+            req.flash('warning', 'Logged out successfully.');
             return res.redirect('/');
           });
     }
