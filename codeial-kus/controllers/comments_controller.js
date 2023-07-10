@@ -77,7 +77,7 @@ module.exports.delete = async function(req, res){
 
             // console.log("Deleted Actual comment");
 
-            req.flash('success', "Comment deleted successfully");
+            req.flash('warning', "Comment deleted successfully");
 
             return res.redirect('/');
         }else{
