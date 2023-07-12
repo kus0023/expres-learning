@@ -7,7 +7,7 @@
        <div class="container">
            <!-- Form will only be visible to authenticated user, Although one check needed at router level as well -->
       <% if(locals.user) {%>
-        <section id="post-feed" class="shadow mt-4 ">
+        <section id="post-feed" class="shadow mt-4 sticky-top">
           <div class="card">
             <h5 class="card-header">Have something in Mind?</h5>
             <div class="card-body">
@@ -54,4 +54,3 @@
 </section>
 
 
-<script src="/js/comments.js"></script>
