@@ -2,22 +2,12 @@ const Comment = require('../models/Comment');
 const Post = require('../models/Post');
 
 module.exports.create = async function(req, res){
-
-    // console.log("Creating comments: ", req.body);
-
-    let postDoc;
-
-    //Check if post id is correct or not
-    try{
-        postDoc = await Post.findById(req.body.post_id);
-
-    }catch(err){
-        // console.log(`Post with Id: ${req.body.post_id} Not found.`);
-        return res.redirect('/');
-    }
-
     
     try {
+
+        //Check if post id is correct or not
+        const postDoc = await Post.findById(req.body.post_id);
+
         if(postDoc){
 
             //If post id is correct then save a comment with that post id
@@ -27,6 +17,8 @@ module.exports.create = async function(req, res){
                 user: req.user.id,
             });
 
+            await commentDoc.populate('user')
+
             //Updating post with that comment id and saving it.
             postDoc.comments.push(commentDoc.id);
 
@@ -34,13 +26,29 @@ module.exports.create = async function(req, res){
 
             // console.log(`Updated post doc has been saved. Post Doc: ${updatedPostDoc}`);
             req.flash('success', "Comment Added successfully");
+
+
+            if(req.xhr){
+                return res.status(201).json({success_message: "Comment Added successfully", error_message: null, result: {updatedPostDoc, commentDoc}})
+            }
+
             return res.redirect('/');
         }else{
+
+            if(req.xhr){
+                return res.status(404).json({success_message: null, error_message: "Post is not found.", result: null})
+            }
+
             req.flash('failure', "Post is not found");
             return res.redirect('/');
         }
     } catch (err) {
         console.log("Error in adding comments: ", err);
+
+        if(req.xhr){
+            return res.status(500).json({success_message: null, error_message: "Please try later", result: null});
+        }
+
         return res.redirect('/');
     }
 }

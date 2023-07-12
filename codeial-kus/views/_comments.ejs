@@ -1,8 +1,8 @@
 <!-- If user is not logged in then he will not be able to comment on Post. -->
 <% if(locals.user) {%> 
     <div class="collapse" id="<%= 'post_'+post.id%>">
-      <div class="card card-body">
-        <form action="/comments/create" method="post">
+      <div class="card card-body" id="comment-forms">
+        <form id="<%='comment_form_'+post.id  %>" onsubmit=createComment>
           <div class="input-group mb-3">
               <!-- Hidden Input will be used to send comment for specific post and user -->
               <input type="hidden" name="post_id" value="<%= post.id %>" >
@@ -22,8 +22,8 @@
   
 
   <!-- Collapse: List of comments Apears when user click on view comments-->
-  <div class="collapse" id="<%= 'read_'+post.id%>" id="comments-list">
-    <div class="list-group " >
+  <div class="collapse" id="<%= 'comment_'+post.id%>" id="comments-list">
+    <div class="list-group" id="<%= 'comment_grp_'+post.id%>">
       <% for(comment of post.comments) {%>
         <div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
           <div class="d-flex w-100 justify-content-between">

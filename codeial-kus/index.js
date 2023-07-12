@@ -31,7 +31,7 @@ app.use(express.static("./assets"));
 //express ejs layout setup, It should be before routes middleware.
 app.use(expressLayouts);
 app.set("layout extractStyles", true); //link tag of current rendering ejs will placed inside layout(global) where <%- style %> is mentioned.
-app.set("layout extractStyles", true); //styyle tag of current rendering ejs will placed inside layout(global) where <%- script %> is mentioned.
+app.set("layout extractScripts", true); //Script tag of current rendering ejs will placed inside layout(global) where <%- script %> is mentioned.
 
 
 //setup passport initialization.

@@ -1,8 +1,13 @@
-let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-let toastList = toastElList.map(function (toastEl) {
-    return new bootstrap.Toast(toastEl, option)
-})
+// Initializing toast
+window.addEventListener('load', function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl);
+    })
 
-toastList.forEach(toast => {
-    toast.show();
-});
+    toastList.forEach(element => {
+                element.show();
+            });
+
+        // console.log(toastList);
+}, false);
