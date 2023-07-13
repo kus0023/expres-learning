@@ -55,6 +55,7 @@ module.exports.create = async function(req, res){
 
 
 module.exports.delete = async function(req, res){
+    
     try {
 
         // console.log("Finding post and comments");
@@ -87,16 +88,28 @@ module.exports.delete = async function(req, res){
 
             req.flash('warning', "Comment deleted successfully");
 
+            if(req.xhr){
+                return res.status(202).json({success_message: "Comment Deleted", error_message: null, result: {updatedPostDoc, deleteCommentResult}})
+            }
+
             return res.redirect('/');
         }else{
             req.flash('failure', "Unauthorised User");
             console.log("Permission denied for user to delete the comment.");
+            if(req.xhr){
+                return res.status(401).json({success_message: null, error_message: "Unauthorized", result: null});
+            }
             return res.redirect('/');
         }
         
     } catch (err) {
         console.log("Error in deleting comment", err);
         req.flash('failure', "Something Wrong happend while deleting the comment");
+
+        if(req.xhr){
+            return res.status(500).json({success_message: null, error_message: "Please try later", result: null});
+        }
+
         return res.redirect('/');
     }
 }

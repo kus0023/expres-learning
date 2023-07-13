@@ -1,13 +1,14 @@
 
 
 {
-    console.log($("#comment-forms form"));
+    // console.log($("#comment-forms form"));
     //This will get comment form id of particular post on which we will post the request.
     $("#comment-forms form").submit(function (e) {
         e.preventDefault();
         createComment(e.target.id);
     });
 
+    $("a.comment-delete-link").click(deleteCommentLinkButton);
 
     //Making ajax call to create the form.
     function createComment(formId){
@@ -38,31 +39,31 @@
         $('html, body').scrollTop($('#comment_'+post._id).offset().top); //Scroll to the comment.
 
 
-
-        deleteCommentLinkButton($(' .comment-delete-link', elementComment));
+        //Setting up click event listener for new link.
+        $("a.comment-delete-link").click(deleteCommentLinkButton);
     }
 
-    function deleteCommentLinkButton(link){
-        $(link).click(function(e){
-            e.preventDefault();
+    function deleteCommentLinkButton(e){
 
-            $.ajax({
-                type: 'get',
-                url: $(link).prop('href'),
-                success: function(data){
-                    console.log(data);
-                },
-                error: function(err){
-                    console.log(err);
-                }
-            })
-        })
+        e.preventDefault();
+        console.log(e.target.href);
+        $.ajax({
+            type: 'DELETE',
+            url: e.target.href,
+            success: function(data){
+                //remove deleted comment from DOM.
+                $('#comment_item_'+data.result.deleteCommentResult._id).remove();
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
     }
 
     
     function createElement (post, comment){
 
-        let commentElement = `<div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
+        let commentElement = `<div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true" id=${"comment_item_"+comment._id} >
                                 <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">${ comment.user.name }</h6>
                                 <small>${ comment.createdAt }</small>
@@ -70,7 +71,7 @@
                                 <div class="row justify-content-between">
                                     <p class="mb-1 col-8">${ comment.content }</p>
                                     <div class="text-end col-2">
-                                        <a href="/comments/delete?post_id=${ post.id }&comment_id=${ comment.id }" class="btn btn-sm btn-danger comment-delete-link" >Delete</a>  
+                                        <a href="/comments/delete?post_id=${ post._id }&comment_id=${ comment._id }" class="btn btn-sm btn-danger comment-delete-link" >Delete</a>  
                                     </div>
                                 </div>
                             </div>`

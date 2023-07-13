@@ -25,7 +25,7 @@
   <div class="collapse" id="<%= 'comment_'+post.id%>" id="comments-list">
     <div class="list-group" id="<%= 'comment_grp_'+post.id%>">
       <% for(comment of post.comments) {%>
-        <div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true">
+        <div class="list-group-item list-group-item-action list-group-item-warning" aria-current="true" id="<%= "comment_item_"+comment.id %>" >
           <div class="d-flex w-100 justify-content-between">
             <h6 class="mb-1"><%= comment.user.name %></h6>
             <small><%= comment.createdAt %></small>
@@ -34,7 +34,7 @@
             <p class="mb-1 col-8"><%= comment.content %></p>
             <div class="text-end col-2">
               <% if(locals.user && (post.user.id == locals.user.id || comment.user.id == locals.user.id)) {%>
-                <a href="/comments/delete?post_id=<%= post.id %>&comment_id=<%= comment.id %>" class="btn btn-sm btn-danger" >Delete</a>
+                <a href="/comments/delete?post_id=<%= post.id %>&comment_id=<%= comment.id %>" class="btn btn-sm btn-danger comment-delete-link" >Delete</a>
               <% } %>
             </div>
           </div>
