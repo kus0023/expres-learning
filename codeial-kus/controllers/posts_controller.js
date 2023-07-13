@@ -10,12 +10,24 @@ module.exports.create = async function (req, res){
             user: req.user.id
         });
 
+        await postDoc.populate('user', {password: false});
+
+        if(req.xhr){
+            return res.status(201).json({success_message: "Post Created successfully", error_message: null, result: {postDoc}});
+        }
+
         // console.log(`Post saved ${postDoc} by user ${req.user.name}`);
         req.flash('success', "Post Created");
         return res.redirect('back');
     } catch (err) {
         req.flash('failure', "Post could not saved");
         console.log("Error in saving post", err);
+
+
+        if(req.xhr){
+            return res.status(500).json({success_message: null, error_message: "Please try later", result: null});
+        }
+
         return res.redirect('back');
     }
 }
