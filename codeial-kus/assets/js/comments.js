@@ -40,6 +40,7 @@
 
 
         //Setting up click event listener for new link.
+        $("a.comment-delete-link").unbind('click');
         $("a.comment-delete-link").click(deleteCommentLinkButton);
     }
 
