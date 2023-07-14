@@ -7,7 +7,7 @@
           <% if(locals.user && post.user.id == locals.user.id) {%>
             <ul class="nav card-header-pills float-end">
               <li class="nav-item">
-                <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end">Delete</a>
+                <a href="/posts/delete?post_id=<%= post.id %>" class="btn btn-danger float-end post-delete-link">Delete</a>
               </li>
             </ul>
           <% } %>

@@ -53,15 +53,29 @@ module.exports.delete = async function (req, res){
             // console.log("Post and comment deleted, comment delete result: ", deleteCommentsResult);
 
             req.flash('warning', "Comments Deleted Successfully");
+
+            if(req.xhr){
+                return res.status(202).json({success_message: "Post Deleted", error_message: null, result: {postDoc}});
+            }
+
             return res.redirect('back');
         }else{
             req.flash('failure', "Unauthorized");
             // console.log("Not the right user to delete the post.");
+            if(req.xhr){
+                return res.status(401).json({success_message: null, error_message: "Unauthorized", result: null});
+            }
+
             return res.redirect('back');
         }
     } catch (err) {
         req.flash('failure', "Something went wrong !");
         console.log("Error in Deleting post", err);
+
+        if(req.xhr){
+            return res.status(500).json({success_message: null, error_message: "Please try later", result: null});
+        }
+
         return res.redirect('back');
     }
 }

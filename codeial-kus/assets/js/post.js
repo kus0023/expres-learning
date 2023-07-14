@@ -15,6 +15,9 @@
         })
     });
 
+    //handle link click of delete post: TODO
+    $(" .post-delete-link").click(deletePost);
+
     function handleSuccess(data){
         const post = data.result.postDoc;
         let newPostElement = createElement(post);
@@ -22,10 +25,39 @@
         //add the new post in post list 
         $("#posts-list").prepend(newPostElement);
 
+        //Comment form initialization
         $("#comment-forms form").submit(function (e) {
             e.preventDefault();
-            createComment(e.target.id);
+            createComment(e.target.id); //See ==> /assests/js/comment.js
         });
+
+        //Delete link initialization for post and comment.:TODO
+
+        $( " .post-delete-link").unbind( "click" );
+        $(" .post-delete-link").click(deletePost);
+    }
+
+    function deletePost(e){
+        //TODO
+        e.preventDefault();
+
+        console.log("Dletig the post", e.target.href);
+
+        $.ajax({
+            type: 'DELETE',
+            url: e.target.href,
+            success: function(data){
+                // console.log(data);
+                let post = data.result.postDoc;
+
+                //remove deleted post from DOM.
+                $('#post_item_'+post._id).remove();
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+
     }
 
 
@@ -36,7 +68,7 @@
             <div class="card-header">                
                 <ul class="nav card-header-pills float-end">
                     <li class="nav-item">
-                        <a href="/posts/delete?post_id=${ post._id }" class="btn btn-danger float-end">Delete</a>
+                        <a href="/posts/delete?post_id=${ post._id }" class="btn btn-danger float-end post-delete-link">Delete</a>
                     </li>
                 </ul>            
                 <h5>            
