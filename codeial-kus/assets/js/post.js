@@ -7,6 +7,7 @@
         $.ajax({
             type: 'POST',
             url: '/posts/create',
+            isLocal: true, //Send the flash message and show.
             data: postCreateFormElem.serialize(),
             success: handleSuccess,
             error: function(err){
@@ -41,11 +42,10 @@
         //TODO
         e.preventDefault();
 
-        console.log("Dletig the post", e.target.href);
-
         $.ajax({
             type: 'DELETE',
             url: e.target.href,
+            isLocal: true,
             success: function(data){
                 // console.log(data);
                 let post = data.result.postDoc;

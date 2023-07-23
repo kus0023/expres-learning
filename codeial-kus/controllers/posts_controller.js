@@ -12,12 +12,13 @@ module.exports.create = async function (req, res){
 
         await postDoc.populate('user', {password: false});
 
+        req.flash('success', "Post Created")
+
         if(req.xhr){
-            return res.status(201).json({success_message: "Post Created successfully", error_message: null, result: {postDoc}});
+            return res.status(201).json({message: req.flash('success'), success_message: "Post Created successfully", error_message: null, result: {postDoc}});
         }
 
         // console.log(`Post saved ${postDoc} by user ${req.user.name}`);
-        req.flash('success', "Post Created");
         return res.redirect('back');
     } catch (err) {
         req.flash('failure', "Post could not saved");
@@ -45,17 +46,17 @@ module.exports.delete = async function (req, res){
             await postDoc.deleteOne();
 
             
-            req.flash('warning', "Post deleted Successfully");
+            
 
             // console.log("deleting comments");
             const deleteCommentsResult = await Comment.deleteMany({post: postDoc._id}).exec();
 
             // console.log("Post and comment deleted, comment delete result: ", deleteCommentsResult);
 
-            req.flash('warning', "Comments Deleted Successfully");
+            req.flash('warning', "Post Deleted");
 
             if(req.xhr){
-                return res.status(202).json({success_message: "Post Deleted", error_message: null, result: {postDoc}});
+                return res.status(202).json({message: req.flash('warning'), success_message: "Post Deleted", error_message: null, result: {postDoc}});
             }
 
             return res.redirect('back');
