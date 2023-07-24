@@ -7,7 +7,7 @@
         <div class="card mb-3 p-3">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSon7UXXyxvoxfrD0brWchUB7kIU545JP7QtQ&usqp=CAU"
+                    <img src="<%= locals.user_profile.avatar %>"
                         class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
@@ -20,11 +20,16 @@
                         </p>
                         <p class="card-text"><small class="text-muted">Updated At: <%= locals.user_profile.updatedAt %></small></p>
     
-                        <form action="/users/profile" method="POST">
+                        <form action="/users/profile" method="POST" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <input type="hidden" name="user_id" value="<%= locals.user_profile.id %>" >
                                 <input type="text" class="form-control" placeholder="Put your name to udpate" aria-label="Recipient's name"
-                                    aria-describedby="button-addon2" name="user_name" value="<%= locals.user_profile.name %>" required>
+                                    aria-describedby="button-addon2" name="user_name" value="<%= locals.user_profile.name %>">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Update</button>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="file" name="avatar" id="user_profile_avatar" placeholder="Update you profile photo"> 
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Update</button>
                             </div>
                         </form>

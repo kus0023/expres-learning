@@ -1,4 +1,3 @@
-const { error } = require('console');
 const mongoose = require('mongoose');
 
 const URL = "mongodb://localhost:27017/codeial_dev"

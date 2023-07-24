@@ -1,5 +1,7 @@
 
-const User = require("../models/User")
+const User = require("../models/User");
+const path = require('path');
+const fs = require('fs');
 
 module.exports.viewProfile = async function (req, res) {
     try {
@@ -7,45 +9,58 @@ module.exports.viewProfile = async function (req, res) {
         const profileUser = await User.findById(req.query.user_id);
 
         return res.render("user_profile", { title: "Profile page", user_profile: profileUser });
-        
+
     } catch (err) {
         console.log("Error fetching profile data", err);
         return res.render('back');
     }
-    
+
 }
 
 module.exports.updateProfile = async function (req, res) {
-    try {
 
-        // console.log(req.user, req.body.user_id);
+    User.userAvatarUpload(req, res, async (err) => {
 
-        if(req.user._id == req.body.user_id){
+        if (err) {
+            console.log("Multer Error", err);
+            return res.redirect('back');
+        }
+
+        if (req.user._id == req.body.user_id) {
             const user = await User.findById(req.body.user_id);
-            if(req.body.user_name.trim() != ""){
-                const result = await user.updateOne({name: req.body.user_name}).exec();
-                // console.log("profile updated.");
 
-                req.flash('success', "Profile Updated successfully.");
-                return res.redirect('back');
-            }else{
+            //First check for name field.
+            if (req.body.user_name.trim() !== "" && req.body.user_name.trim() !== user.name) {
+                const result = await user.updateOne({ name: req.body.user_name.trim() }).exec();
 
-                console.log("name is empty.");
-                req.flash('failure', "Name cannot be empty");
-                return res.redirect('back');
+                req.flash('success', "Profile Name Updated successfully.");
             }
-        }else{
+
+            const prevProfilePath = user.avatar;
+            //Second check for file
+            if (req.file) {
+                user.updateOne({ avatar: path.join(User.getAvatarPath, req.file.filename)}).exec();
+                req.flash('success', "Profile pic uploaded successully");
+            }
+
+            //Remove previous file
+            if (prevProfilePath) {
+
+                if (fs.existsSync(path.resolve(prevProfilePath))) {
+                    fs.unlinkSync(prevProfilePath);
+                } 
+            }
+
+            return res.redirect('back');
+
+
+        } else {
             console.log("User is not authorised to update profile.");
             req.flash('failure', "Unauthorised");
             return res.redirect('back');
         }
-        
-        
-    } catch (err) {
-        console.log("Error updating profile data", err);
-        return res.render('back');
-    }
-    
+    });
+
 }
 
 //use to get the Page to login
@@ -107,6 +122,6 @@ module.exports.login = function (req, res) {
 }
 
 //sign in and create a session for the user
-module.exports.createSession = function(req, res){
+module.exports.createSession = function (req, res) {
     return res.redirect("/");
 }
