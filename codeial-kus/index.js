@@ -25,7 +25,7 @@ app.use(cookieParser())
 
 //Static files
 app.use(express.static("./assets"));
-app.use(path.join(__dirname, '/uploads'), express.static("./uploads"));
+app.use("/uploads", express.static("./uploads"));
 
 
 

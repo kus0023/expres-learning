@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const path = require('path');
 
-const AVATAR_PATH = path.join(__dirname,'..', '/uploads/users/profile');
+const AVATAR_PATH = '/uploads/users/profile';
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
-        cb(null, AVATAR_PATH)
+        cb(null, path.join(__dirname, '..', AVATAR_PATH));
     },
     filename: function (req, file, cb) {
         
@@ -38,7 +38,8 @@ const storage = multer.diskStorage({
 
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
         cb(null, file.fieldname + '-' + uniqueSuffix+"."+extension);
-    }
+    },
+    filesize: 100,
 });
 
 userSchema.statics.getAvatarPath = AVATAR_PATH;

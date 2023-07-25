@@ -45,9 +45,9 @@ module.exports.updateProfile = async function (req, res) {
 
             //Remove previous file
             if (prevProfilePath) {
-
-                if (fs.existsSync(path.resolve(prevProfilePath))) {
-                    fs.unlinkSync(prevProfilePath);
+                const fullPath = path.join(__dirname, '..', prevProfilePath);
+                if (fs.existsSync(fullPath)) {
+                    fs.unlinkSync(fullPath);
                 } 
             }
 
