@@ -20,7 +20,7 @@ module.exports.login = async function (req, res){
         return res.status(200).json({
             message: 'Successfully Logged In',
             token: jwt.sign(user.toJSON(), 'qwertyuiopasdfghjkl', 
-            {expiresIn: '10000'}),
+            {expiresIn: 1000 * 60 * 60 * 24}),
         });
 
     } catch (error) {

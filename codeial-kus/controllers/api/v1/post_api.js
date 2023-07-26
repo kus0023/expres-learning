@@ -32,7 +32,21 @@ module.exports.getAll = async function (req, res) {
 module.exports.delete = async function (req, res) {
 
     try {
+        
         const postDoc = await Post.findById(req.query.post_id);
+
+        if(!postDoc){
+            return res.status(404).json({
+                message: "Post not found."
+            })
+        }
+
+        if(postDoc.user._id != req.user.id){ 
+            
+            return res.status(401).json({
+                message: "You cannot delete this post"
+            })
+        }
 
         const postDeletedResult = await postDoc.deleteOne();
 
