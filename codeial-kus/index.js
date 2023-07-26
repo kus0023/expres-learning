@@ -9,6 +9,7 @@ const customMiddlewares = require('./config/middlewares');
 
 //Add manual made local strategy
 const localStrategyPassport = require('./config/passport_local_strategy');
+const jwtStrategyPassport = require('./config/passport_jwt_strategy');
 
 //Database
 const db = require("./config/db");
