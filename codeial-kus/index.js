@@ -21,7 +21,7 @@ const app = express();
 //Midlewares
 
 //Form data
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 app.use(cookieParser())
 
 //Static files

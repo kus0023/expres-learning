@@ -1,5 +1,4 @@
 <section id="posts-list" class="mt-4 text-start">
-
     <% for(post of posts) {%>
       <div id="<%= 'post_item_'+post.id %>" class="card mt-4 <%= locals.user && locals.user.id == post.user.id ? "border-success shadow":""%>">
         <div class="card-header">
