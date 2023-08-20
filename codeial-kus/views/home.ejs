@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<section class="container">
+<section class="container" id="home-main-wrapper">
 
   <div class="row m-auto row g-4">
     <section class="col-sm-12 col-md-9">
@@ -50,6 +50,15 @@
         </ul>
       </section>
     </aside>
+
+    <!-- Chat box -->
+    <!-- Only logged in user can view -->
+    <% if(locals.user){%>
+      <div class="chat-box position-fixed p-3 bottom-0 end-0">
+        <%- include('_chat.ejs') -%>
+      </div>
+    <%}%>
+
   </div>  
 </section>
 

@@ -21,7 +21,7 @@ const app = express();
 //Midlewares
 
 //Form data
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 //Static files
@@ -44,8 +44,8 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     store: require('./config/mongodb_session_store'),
-    cookie:{
-        maxAge: (1000*60*100),
+    cookie: {
+        maxAge: (1000 * 60 * 100),
     }
 }));
 
@@ -65,9 +65,6 @@ app.use('/', require('./routes')); //This will invoke index.js inside ./route by
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
-
-
 app.listen(PORT, (err) => {
     if (err) {
         console.log("Error incountered", err);
@@ -77,3 +74,9 @@ app.listen(PORT, (err) => {
     console.log(`Server started on port: ${PORT}`);
     console.log(`Visit: http://localhost:${PORT}`);
 });
+
+
+module.exports = app;
+
+//chat socket server
+require('./chat-engine')

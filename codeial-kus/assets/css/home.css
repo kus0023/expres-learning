@@ -2,6 +2,10 @@
   text-align: start;
 }
 
+#home-main-wrapper{
+  min-height: 100vh;
+}
+
 .carousel .item {
     height: 500px;
   }
@@ -16,4 +20,15 @@
 
 .comment-btn-no-outline > button:focus{
   box-shadow: none;
+}
+
+/* Chat box */
+.chat-box{
+  z-index: 1000000;
+  width: 400px;
+  height: 400px;
+  max-height: 400px;
+  max-width: 400px;
+  background-color: rgb(202, 208, 213);
+  border: 1px solid black;
 }
